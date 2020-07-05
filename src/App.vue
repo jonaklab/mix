@@ -61,6 +61,7 @@
 // import DetailsArea from './components/DetailsArea.vue'
 
 import axios from 'axios'
+import config from '../config.json'
 
 export default {
   name: 'app',
@@ -84,7 +85,7 @@ export default {
       player.seekTo(0)
     },
     searchMe() {
-      let url= `https://www.googleapis.com/youtube/v3/search?q=${this.q}&part=snippet&key=`
+      let url= `https://www.googleapis.com/youtube/v3/search?q=${this.q}&part=snippet&key=${config.api_key}`
       axios.get(url).then(res => {
         console.log(res)
         this.items = res.data.items

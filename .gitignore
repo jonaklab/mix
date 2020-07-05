@@ -1,4 +1,4 @@
-.env
+config.json
 .vscode
 node_modules
 .DS_Store
