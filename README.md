@@ -4,6 +4,7 @@ just another random app that lets you play youtube videos, with a little twist f
 
 
 # dev note 
-1. requires node to be installed on your machine 
-2. see the repo wiki page api / api_key related help
+1. requires nodejs to be installed on your machine 
+2. see the repo wiki page for api / api_key related help
+3. copy and rename `config.json.exmample` to `config.json` and set `api_key` from step 2
 

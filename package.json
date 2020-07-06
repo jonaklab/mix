@@ -1,5 +1,5 @@
 {
-  "name": "todo",
+  "name": "mix",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,8 +17,6 @@
     "@vue/cli-plugin-eslint": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
     "node-sass": "^4.9.3",
-    "pug": "^2.0.3",
-    "pug-plain-loader": "^1.0.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.17"
   },
