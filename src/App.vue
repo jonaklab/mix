@@ -1,15 +1,18 @@
-<template lang="pug">
-  #app
-    .container-fluid 
-      .row  
-        div.col-12.text-center
-          h1
+<template>
+  <div id="app">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1>
             <b>You</b>
             <span class="badge badge-danger">Mix</span>
-      .row 
-        div.col-4
+          </h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
           <div class="list-group list-group-flush">
-            a(href="#" class="list-group-item list-group-item-action" v-for='dit in selitems')
+            <a href="#" class="list-group-item list-group-item-action" v-for='dit in selitems'>
               <div class="card">
                 <div class="row no-gutters">
                   <div class="col-md-4">
@@ -24,15 +27,19 @@
                   </div>
                 </div>
               </div>
+            </a>
           </div>
-        div.col-8
-          div 
-            form
+        </div>
+        <div class="col-8">
+          <div>
+            <form>
               <input class="form-control form-control-lg" type="text" placeholder="search" v-model="q">
               <button type="button" v-on:click="searchMe" class="btn btn-primary">Submit</button>
-          div
+            </form>
+          </div>
+          <div>
             <div class="list-group list-group-flush">
-              a(href="#" class="list-group-item list-group-item-action" v-for='dit in items')
+              <a href="#" class="list-group-item list-group-item-action" v-for='dit in items'>
                 <div class="card">
                   <div class="row no-gutters">
                     <div class="col-md-4">
@@ -49,7 +56,13 @@
                     </div>
                   </div>
                 </div>
+              </a>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 
