@@ -5,7 +5,13 @@
     <section class="section">
       <div class="field has-addons has-addons-fullwidth">
         <div class="control">
-            <input v-model="searchedInput" class="input is-large" type="text" placeholder="Search on youtube">
+            <input 
+              v-model="searchedInput" 
+              class="input is-large" 
+              type="text" 
+              placeholder="Search on youtube"
+              @keyup.enter="search"
+            >
         </div>
         <div class="control">
             <button @click="search" class="button is-info is-large">Search</button>
