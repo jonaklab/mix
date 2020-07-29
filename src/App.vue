@@ -1,77 +1,31 @@
 <template>
-  <div id="app">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 text-center">
-          <h1>
-            <b>You</b>
-            <span class="badge badge-danger">Mix</span>
-          </h1>
+  <div class="container">
+    <AppHeader />
+    
+    <section class="section">
+      <div class="field has-addons has-addons-fullwidth">
+        <div class="control">
+            <input 
+              v-model="searchedInput" 
+              class="input is-large" 
+              type="text" 
+              placeholder="Search on youtube"
+              @keyup.enter="search"
+            >
+        </div>
+        <div class="control">
+            <button @click="search" class="button is-info is-large">Search</button>
         </div>
       </div>
-      <div class="row">
-        <div class="col-4">
-          <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action" v-for='dit in selitems'>
-              <div class="card">
-                <div class="row no-gutters">
-                  <div class="col-md-4">
-                    <img :src="dit.snippet.thumbnails['default'].url" class="card-img" alt="...">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">{{dit.snippet.title}}</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-8">
-          <div>
-            <form>
-              <input class="form-control form-control-lg" type="text" placeholder="search" v-model="q">
-              <button type="button" v-on:click="searchMe" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-          <div>
-            <div class="list-group list-group-flush">
-              <a href="#" class="list-group-item list-group-item-action" v-for='dit in items'>
-                <div class="card">
-                  <div class="row no-gutters">
-                    <div class="col-md-4">
-                      <img :src="dit.snippet.thumbnails['default'].url" class="card-img" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                      <div class="card-body">
-                        <h5 class="card-title">{{dit.snippet.title}}</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                        <button type="button" v-on:click="add(dit)" class="btn btn-success">Add</button>
-                        </p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
+
+    <SearchResults :searchResults="searchResults" />
   </div>
 </template>
 
-
-<style src="./assets/sass/style.scss" lang="scss"></style>
-
 <script>
-// import Sidebar from './components/Sidebar.vue'
-// import ListArea from './components/ListArea.vue'
-// import DetailsArea from './components/DetailsArea.vue'
+import AppHeader from './components/AppHeader'
+import SearchResults from './components/SearchResults'
 
 import axios from 'axios'
 import config from '../config.json'
@@ -80,30 +34,32 @@ export default {
   name: 'app',
   data () {
     return {
-      q: '',
-      items: [],
+      searchedInput: null,
+      searchResults: [],
       selitems: []
     }
   },
   components: {
-  //  Sidebar,
-  //  ListArea,
-  //  DetailsArea
+    AppHeader,
+    SearchResults
   },
   methods: {
     add(item) {
-      player.cueVideoById(item.id.videoId,0)
-      player.playVideo()
       this.selitems.push(item)
-      player.seekTo(0)
     },
-    searchMe() {
-      let url= `https://www.googleapis.com/youtube/v3/search?q=${this.q}&part=snippet&key=${config.api_key}`
+    search() {
+      let url= `https://www.googleapis.com/youtube/v3/search?q=${this.searchedInput}&part=snippet&key=${config.api_key}`
       axios.get(url).then(res => {
-        console.log(res)
-        this.items = res.data.items
-      }).catch(console.log)
+        window.console.log(res)
+        this.searchResults = res.data.items
+      })
+      .catch( err => {
+        window.console.log(err)
+      })
     }
   }
 }
 </script>
+
+<style lang="scss">
+</style>
